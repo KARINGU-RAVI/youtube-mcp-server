@@ -64,6 +64,11 @@ async function main() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
     console.error('YouTube MCP Server running on stdio');
+
+    // CRITICAL FIX: Keep the process alive indefinitely for Render
+    await new Promise(() => {
+        // This promise never resolves, keeping the Node.js event loop alive
+    });
 }
 
 main().catch((error) => {
