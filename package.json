@@ -1,0 +1,28 @@
+{
+  "name": "youtube-mcp-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@googleapis/youtube": "^29.0.0",
+    "@modelcontextprotocol/sdk": "^1.22.0",
+    "googleapis": "^166.0.0",
+    "youtube-transcript": "^1.2.1",
+    "youtube-transcript-api": "^3.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "dotenv": "^17.2.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

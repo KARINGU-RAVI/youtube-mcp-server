@@ -1,0 +1,14 @@
+{
+    "servers": {
+        "youtubeMcp": {
+            "command": "node",
+            "args": [
+                "./dist/index.js"
+            ],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "YOUTUBE_API_KEY": "${env:YOUTUBE_API_KEY}"
+            }
+        }
+    }
+}
