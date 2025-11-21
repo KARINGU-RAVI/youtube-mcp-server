@@ -11,6 +11,7 @@ import searchVideosTool from './tools/search';
 import analyzeCommentsTool from './tools/comments';
 import compareChannelsTool from './tools/channel';
 import { ITool } from './types';
+import * as http from 'http';
 
 // Define the tools list
 const tools: ITool[] = [
@@ -65,9 +66,28 @@ async function main() {
     await server.connect(transport);
     console.error('YouTube MCP Server running on stdio');
 
-    // CRITICAL FIX: Keep the process alive indefinitely for Render
+    // Start a minimal HTTP health-check server so platforms like Render
+    // detect the service as running (listens on process.env.PORT or 8080).
+    const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+    const healthServer = http.createServer((req, res) => {
+        if (req.method === 'GET' && req.url === '/health') {
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end('OK');
+            return;
+        }
+        res.writeHead(404);
+        res.end();
+    });
+
+    healthServer.listen(port, () => {
+        console.error(`Health server listening on port ${port}`);
+    });
+
+    // Keep the process alive for Render and other hosts. The HTTP server
+    // will keep the event loop active; still await a never-resolving promise
+    // to ensure the process doesn't exit even if no other handles are present.
     await new Promise(() => {
-        // This promise never resolves, keeping the Node.js event loop alive
+        // intentionally never resolves
     });
 }
 
