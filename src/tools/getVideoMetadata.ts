@@ -45,6 +45,7 @@ const getVideoMetadataTool: ITool = {
                     type: 'text',
                     text: JSON.stringify(formattedData, null, 2)
                 }],
+            isError: false,
             };
 
         } catch (error: any) {

@@ -44,6 +44,7 @@ const analyzeCommentsTool: ITool = {
                     type: 'text',
                     text: JSON.stringify(extractedComments, null, 2)
                 }],
+            isError: false,
             };
 
         } catch (error: any) {

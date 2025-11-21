@@ -45,6 +45,7 @@ const searchVideosTool: ITool = {
                     type: 'text',
                     text: JSON.stringify(results, null, 2)
                 }],
+                isError: false,
             };
 
         } catch (error: any) {
